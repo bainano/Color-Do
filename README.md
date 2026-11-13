@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="assets/color-do-logo-full.png#gh-light-mode-only" alt="Color Do" width="520" />
-  <img src="assets/color-do-logo-full-dark.png#gh-dark-mode-only" alt="Color Do" width="520" />
+  <img src="assets/color-do-logo-full.svg#gh-light-mode-only" alt="Color Do" width="520" />
+  <img src="assets/color-do-logo-full-dark.svg#gh-dark-mode-only" alt="Color Do" width="520" />
 </p>
 
 <p align="center"><b>多彩生活,由此开启! 开源好用的待办软件.</b></p>
