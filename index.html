@@ -839,9 +839,18 @@
         if (!next) resetArrow();          /* 回第一屏 / 取消出发，箭头瞬间回位 */
         if (next === isSecond) return;
         isSecond = next;
+        /* 隐藏某一屏前，先把还停在该屏里的焦点移开：
+           否则 aria-hidden 会套住焦点元素，浏览器报「Blocked aria-hidden」警告。
+           键盘用户回到第一屏时再把焦点交还给「即刻了解」按钮。 */
+        var hideScreen = next ? first : secondScreen;
+        var showScreen = next ? secondScreen : first;
+        if (document.activeElement && hideScreen.contains(document.activeElement)) {
+          document.activeElement.blur();
+        }
         document.body.classList.toggle('is-second', isSecond);
         first.setAttribute('aria-hidden', String(isSecond));
         secondScreen.setAttribute('aria-hidden', String(!isSecond));
+        if (!next && cta) cta.focus();   /* 回第一屏：键盘焦点回到 CTA */
         placeLogo(true);
         lockUntil = Date.now() + HOLD_MS;
       }
