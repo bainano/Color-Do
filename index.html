@@ -83,14 +83,13 @@
       to   { transform: translate(-50%, -50%) rotate(720deg); }
     }
 
-    /* 第二层：中间层，正好一个视口大小，静止不动，叠在背景图上面 */
-    .backdrop__mid {
+    /* 第二层：背景点阵，代码画的 canvas，静止不动，叠在背景图上面。
+       径向衰减——中心稀疏、四周渐密，把视线锁在中间 Logo 区域 */
+    .backdrop__dots {
       position: absolute;
       inset: 0;
-      background-image: url("中间层.png");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
+      width: 100%;
+      height: 100%;
     }
 
     /* 内容层：固定钉在视口上，正好一屏，不参与文档高度计算
@@ -721,7 +720,7 @@
 
   <div class="backdrop" aria-hidden="true">
     <div class="backdrop__bg"></div>
-    <div class="backdrop__mid"></div>
+    <canvas class="backdrop__dots" id="bg-dots" aria-hidden="true"></canvas>
   </div>
 
   <main class="page" id="screen1">
@@ -917,6 +916,62 @@
         }
         touchY = null;
       }, { passive: true });
+    })();
+
+    /* ===== 背景点阵：代码实现，径向衰减（中心稀疏、四周渐密），把视线锁在中间 Logo ===== */
+    (function () {
+      var cv = document.getElementById('bg-dots');
+      if (!cv) return;
+      var TAU = Math.PI * 2;
+      /* 稳定伪随机：按网格坐标推导，重绘/缩放不会抖动 */
+      function hash(i, j) {
+        var n = (i * 374761393 + j * 668265263) | 0;
+        n = (n ^ (n >> 13)) * 1274126177 | 0;
+        n = (n ^ (n >> 16)) >>> 0;
+        return (n % 100000) / 100000;
+      }
+      function draw() {
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var w = window.innerWidth, h = window.innerHeight;
+        cv.width = Math.round(w * dpr);
+        cv.height = Math.round(h * dpr);
+        cv.style.width = w + 'px';
+        cv.style.height = h + 'px';
+        var ctx = cv.getContext('2d');
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, w, h);
+        var g = 26;                           /* 基础网格间距(CSS px) */
+        var cx = w / 2, cy = h / 2;
+        var maxR = Math.hypot(w / 2, h / 2);
+        var pC = 0.08, pE = 1.0;              /* 中心保留概率低(稀疏) → 边缘全保留(密) */
+        var cols = Math.ceil(w / 2 / g) + 2, rows = Math.ceil(h / 2 / g) + 2;
+        ctx.fillStyle = 'rgb(31,36,48)';      /* 品牌墨色 */
+        for (var i = -cols; i <= cols; i++) {
+          for (var j = -rows; j <= rows; j++) {
+            var px = cx + i * g, py = cy + j * g;
+            if (px < -g || px > w + g || py < -g || py > h + g) continue;
+            var nd = Math.min(Math.hypot(i * g, j * g) / (maxR * 0.95), 1);
+            var t = nd * nd * (3 - 2 * nd);    /* smoothstep：密度平滑过渡，不出现硬边环 */
+            var p = pC + (pE - pC) * t;
+            if (hash(i, j) > p) continue;      /* 该格按概率留/弃，形成径向疏密 */
+            var rad = 0.9 + 0.7 * nd;          /* 边缘点略大 */
+            ctx.globalAlpha = 0.07 + 0.13 * nd;/* 中心极淡，边缘清晰 */
+            ctx.beginPath();
+            ctx.arc(px, py, rad, 0, TAU);
+            ctx.fill();
+          }
+        }
+        ctx.globalAlpha = 1;
+      }
+      var rt;
+      window.addEventListener('resize', function () {
+        clearTimeout(rt);
+        rt = setTimeout(draw, 120);
+      });
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', draw);
+      } else { draw(); }
+      window.addEventListener('load', draw);
     })();
 
     /* ===== 第二屏的彩色日期：噪声驱动的自由晕染 + 离屏文字掩码，不用原生描边 ===== */
