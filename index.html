@@ -129,7 +129,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 4;
+      z-index: 3;   /* 盖住两屏内容，但低于顶栏/下拉框（z=4）：菜单展开时 LOGO 不会盖住选项 */
       display: block;
       width: var(--logo-big);
       height: auto;
@@ -245,7 +245,7 @@
       top: 0;
       left: 0;
       right: 0;
-      z-index: 3;
+      z-index: 4;   /* 顶栏连同下拉菜单处于最上层，任何屏的 LOGO 都不能盖住菜单 */
       height: 84px;
       padding: 0 clamp(20px, 3.5vw, 48px);
       display: flex;
