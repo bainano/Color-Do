@@ -346,8 +346,11 @@
        只去掉内边距并让这一层裁切内容：里面的条目铺满宽度、自身不带圆角，
        四角的圆弧完全由外层这一个圆角提供 */
     .nav-menu {
-      position: absolute;
-      top: calc(100% + 10px);
+      /* 独立于顶栏、钉在视口上，自身拥有全场最高层级：
+         任何浮层/整页动画/弹窗都不可能盖住它。位置由 JS 按触发按钮算。 */
+      position: fixed;
+      z-index: 2147483647;   /* CSS 上限：真正的顶层，不靠父级蹭层级 */
+      top: 0;
       right: 0;
       width: 288px;
       max-width: calc(100vw - 40px);
@@ -678,7 +681,12 @@
         </svg>
       </button>
 
-      <div class="nav-menu" id="download-menu" aria-label="选择下载版本">
+    </div>
+  </header>
+
+  <!-- 下拉层独立到 body 顶层：自身即最高层级，不受顶栏层叠上下文限制。
+       位置由 JS 按下载按钮实时计算，视觉上与原来完全一致。 -->
+  <div class="nav-menu" id="download-menu" aria-label="选择下载版本">
         <a class="dl-item" href="downloads/ColorDo-Windows-x64.exe" download>
           <svg class="dl-item__platform" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M2 2h8v8H2V2zm10 0h8v8h-8V2zM2 12h8v8H2v-8zm10 0h8v8h-8v-8z" />
@@ -739,9 +747,7 @@
             <path d="M8 2v8M5 7l3 3 3-3M3 12.5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </a>
-      </div>
-    </div>
-  </header>
+  </div>
 
   <div class="backdrop" aria-hidden="true">
     <div class="backdrop__bg"></div>
@@ -787,7 +793,16 @@
       var trigger = document.getElementById('download-trigger');
       var menu = document.getElementById('download-menu');
 
+      /* 下拉层现在是视口级浮层，每次展开按按钮位置算一次，
+         视觉上仍紧贴按钮下方、右边缘对齐，跟原来完全一样。 */
+      function positionMenu() {
+        var r = trigger.getBoundingClientRect();
+        menu.style.top = Math.round(r.bottom + 10) + 'px';
+        menu.style.right = Math.round(window.innerWidth - r.right) + 'px';
+      }
+
       function setOpen(open) {
+        if (open) positionMenu();   /* 打开前先定位，避免出现瞬间的默认位置 */
         menu.classList.toggle('is-open', open);
         trigger.classList.toggle('is-open', open);
         trigger.setAttribute('aria-expanded', String(open));
@@ -799,7 +814,8 @@
       });
 
       document.addEventListener('click', function (e) {
-        if (!e.target.closest('.nav-download')) setOpen(false);
+        /* 菜单已独立到顶栏之外，点按钮、菜单内部都不算「点外面」 */
+        if (!e.target.closest('.nav-download') && !e.target.closest('.nav-menu')) setOpen(false);
       });
 
       document.addEventListener('keydown', function (e) {
@@ -813,6 +829,11 @@
 
       menu.addEventListener('click', function (e) {
         if (e.target.closest('.dl-item')) setOpen(false);
+      });
+
+      /* 展开时窗口变化，跟着按钮重新定位 */
+      window.addEventListener('resize', function () {
+        if (menu.classList.contains('is-open')) positionMenu();
       });
     })();
 
