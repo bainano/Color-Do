@@ -318,6 +318,16 @@
     /* 纯文字按钮（无图标 / 无箭头）：左右内边距对称，文字才是视觉居中 */
     .nav-btn--plain { padding: 0 22px; }
 
+    /* 「取消」两字：同名字体 + unicode-range 精确限定，字形与全站一致 */
+    @font-face {
+      font-family: "CDHei";
+      font-style: normal;
+      font-weight: 100 900;
+      src: url(data:font/woff2;base64,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) format("woff2");
+      font-display: block;
+      unicode-range: U+53D6, U+6D88;
+    }
+
     /* ===== 共创问卷：居中弹窗，半透明遮罩压暗首页 ===== */
     :root {
       --survey-card-w: 480px;   /* 弹窗卡片宽度：写死，以后要改改这里（手机自动更窄） */
@@ -341,26 +351,49 @@
       flex-direction: column;
       width: var(--survey-card-w);
       max-width: 100%;
-      max-height: calc(100dvh - 48px);
+      max-height: calc(100dvh - 124px);   /* 底部预留两个玻璃按钮的位置 */
       background: #fff;
       border: 1px solid rgba(28, 32, 44, .10);
       border-radius: 16px;
       box-shadow: 0 24px 64px rgba(0, 0, 0, .22);
       box-sizing: border-box;
-      overflow: visible;    /* 关闭钮可以轻微探出卡片，不被裁 */
+      overflow: visible;    /* 按钮浮在卡片外侧，不被裁掉 */
     }
-    /* ===== 自有共创问卷表单（不再嵌入第三方 iframe）===== */
+
+    /* ===== 表单：外层不滚，滚动只发生在 sf-scroll ===== */
     .survey-form {
+      display: flex;
+      flex-direction: column;
       width: 100%;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      font-family: var(--font-hei);
+      color: #1C2028;
+    }
+    .sf-scroll {
       flex: 1 1 auto;
       min-height: 0;
       overflow-y: auto;
       overscroll-behavior: contain;
-      padding: 40px 32px 30px;
-      box-sizing: border-box;
-      font-family: var(--font-hei);
-      color: #1C2028;
+      /* 顶部/右侧各让出 8px：滚动条离卡片圆角有一段距离，不再压在圆角上 */
+      margin: 8px 8px 0 0;
+      padding: 18px 18px 20px 26px;
+      border-radius: 12px;
+      scrollbar-gutter: stable;
+      scrollbar-width: thin;                                  /* Firefox */
+      scrollbar-color: rgba(28, 32, 44, .18) transparent;
     }
+    /* 自定义滚动条：细、透明轨道、圆角滑块 */
+    .sf-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+    .sf-scroll::-webkit-scrollbar-track { background: transparent; }
+    .sf-scroll::-webkit-scrollbar-thumb {
+      background: rgba(28, 32, 44, .16);
+      border-radius: 99px;
+    }
+    .sf-scroll::-webkit-scrollbar-thumb:hover { background: rgba(28, 32, 44, .30); }
+    .sf-scroll::-webkit-scrollbar-corner { background: transparent; }
+
     .sf-title {
       font-size: clamp(20px, 2.4vw, 28px);
       font-weight: 500;
@@ -369,9 +402,9 @@
     }
     .sf-desc {
       font-size: 13px; font-weight: 400; color: #8A90A0;
-      text-align: center; margin: 0 0 30px;
+      text-align: center; margin: 0 0 24px;
     }
-    .sf-field { margin-bottom: 30px; }
+    .sf-field { margin-bottom: 22px; }
     .sf-q {
       font-size: 15px; font-weight: 500; line-height: 1.5;
       margin: 0 0 6px;
@@ -379,7 +412,7 @@
     .sf-req { color: #D1493F; margin-right: 4px; }
     .sf-hint {
       font-size: 12px; font-weight: 400; color: #9AA0AE;
-      margin: 0 0 12px; line-height: 1.5;
+      margin: 0 0 10px; line-height: 1.5;
     }
     .sf-input, .sf-textarea {
       display: block; width: 100%;
@@ -392,7 +425,13 @@
       transition: border-color .15s ease, box-shadow .15s ease;
     }
     .sf-input { height: 44px; }
-    .sf-textarea { min-height: 110px; resize: vertical; line-height: 1.6; }
+    /* 关掉浏览器原生 resize 手柄（右下角那个小三角），高度交给内容自适应 */
+    .sf-textarea {
+      min-height: 96px; max-height: 220px;
+      resize: none;
+      overflow-y: auto;
+      line-height: 1.6;
+    }
     .sf-input::placeholder, .sf-textarea::placeholder { color: #B4B8C2; }
     .sf-input:focus, .sf-textarea:focus {
       outline: none; border-color: #5B7FD9;
@@ -405,19 +444,60 @@
       font-size: 12px; color: #D1493F; margin: 8px 0 0; display: none;
     }
     .sf-field.has-error .sf-error { display: block; }
-    .sf-actions { display: flex; justify-content: center; margin-top: 8px; }
-    .sf-submit {
-      min-width: 140px; height: 44px;
-      font-family: var(--font-hei); font-size: 15px; font-weight: 500;
-      color: #fff; background: #1C2028;
-      border: 0; border-radius: 22px;
-      cursor: pointer;
-      transition: background .15s ease, transform .1s ease, opacity .15s ease;
+
+    /* ===== 两个玻璃胶囊按钮：独立浮在卡片下方（不在卡片里，也没有底栏） ===== */
+    .sf-bar {
+      position: absolute;
+      left: 0; right: 0;
+      bottom: -58px;      /* 按钮高 46 + 间距 12：底边固定，状态提示向上生长，不顶出屏幕 */
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
     }
-    .sf-submit:hover:not(:disabled) { background: #2E3440; }
+    .survey-panel.is-done .sf-bar,
+    .survey-panel.is-repeat .sf-bar { display: none; }
+    .sf-actions {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
+    }
+    .sf-cancel, .sf-submit {
+      height: 46px;
+      padding: 0 30px;
+      font-family: var(--font-hei); font-size: 15px; font-weight: 500;
+      border-radius: 23px;
+      cursor: pointer;
+      /* 玻璃：半透明 + 背景模糊 + 边缘高光；背后是压暗的首页，质感才透得出来 */
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      transition: background .16s ease, border-color .16s ease, transform .1s ease, box-shadow .16s ease;
+    }
+    /* 取消：浅色玻璃 */
+    .sf-cancel {
+      background: rgba(255, 255, 255, .34);
+      border: 1px solid rgba(255, 255, 255, .58);
+      color: #1C2028;
+      box-shadow: 0 6px 22px rgba(12, 16, 24, .16),
+                  inset 0 1px 0 rgba(255, 255, 255, .55);
+    }
+    .sf-cancel:hover { background: rgba(255, 255, 255, .48); }
+    .sf-cancel:active { transform: scale(.97); }
+    .sf-cancel:focus-visible { outline: 2px solid rgba(255, 255, 255, .9); outline-offset: 2px; }
+    /* 提交：深色玻璃，仍是主按钮 */
+    .sf-submit {
+      background: rgba(20, 24, 32, .58);
+      border: 1px solid rgba(255, 255, 255, .22);
+      color: #fff;
+      box-shadow: 0 8px 26px rgba(10, 13, 20, .28),
+                  inset 0 1px 0 rgba(255, 255, 255, .22);
+    }
+    .sf-submit:hover:not(:disabled) { background: rgba(20, 24, 32, .72); }
     .sf-submit:active:not(:disabled) { transform: scale(.97); }
     .sf-submit:disabled { opacity: .55; cursor: default; }
-    .sf-submit:focus-visible { outline: 2px solid #5B7FD9; outline-offset: 2px; }
+    .sf-submit:focus-visible { outline: 2px solid rgba(255, 255, 255, .9); outline-offset: 2px; }
+
     /* 标题里的官方字标：跟第二屏同一个 SVG，高度按 em 等比缩放 */
     .sf-wordmark {
       display: inline-block;
@@ -428,24 +508,26 @@
       user-select: none;
       -webkit-user-drag: none;
     }
-    /* 本机已填过：直接显示提示，不再给表单 */
-    .sf-repeat {
-      display: none;
-      width: 100%;
-      flex: 1 1 auto;
-      flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 40px 32px 34px; box-sizing: border-box;
-      font-family: var(--font-hei);
+    .sf-id {
+      margin: 2px 0 6px;
+      text-align: center;
+      font-size: 11px;
+      color: #B4B8C2;
+      letter-spacing: .02em;
     }
-    .survey-panel.is-repeat .survey-form,
-    .survey-panel.is-repeat .sf-done { display: none; }
-    .survey-panel.is-repeat .sf-repeat { display: flex; }
+    .sf-status {
+      margin: 0; padding: 2px 26px 14px; text-align: center; font-size: 12.5px;
+      line-height: 1.55; display: none;
+    }
+    .sf-status.is-on { display: block; }
+    .sf-status.sf-ok { color: #1E8E5A; }
+    .sf-status.sf-err { color: #D1493F; }
 
     /* ===== 更正 / 重填 ===== */
     .sf-correct-tip {
       display: none;
       margin: 0 0 14px;
-      padding: 9px 38px 9px 12px;
+      padding: 9px 12px;
       background: #FAEEDA;
       color: #854F0B;
       font-size: 12px;
@@ -458,72 +540,63 @@
     .sf-opt {
       font-size: 12px; font-weight: 400; color: #9AA0AE; margin-left: 6px;
     }
-    .sf-textarea--sm { min-height: 76px; }
-    .sf-id {
-      margin: 16px 0 0;
-      text-align: center;
-      font-size: 11px;
-      color: #B4B8C2;
-      letter-spacing: .02em;
-    }
-    .sf-relink {
-      margin-top: 18px;
-      font-family: var(--font-hei); font-size: 13px;
-      color: #2E56C8; background: none; border: 0;
-      padding: 6px 4px; text-decoration: underline; text-underline-offset: 3px;
-      cursor: pointer;
-    }
-    .sf-relink:hover { color: #1F3E99; }
-    .sf-relink:focus-visible { outline: 2px solid #2E56C8; outline-offset: 2px; border-radius: 4px; }
-    .sf-status {
-      margin-top: 18px; text-align: center; font-size: 13px;
-      line-height: 1.6; display: none;
-    }
-    .sf-status.is-on { display: block; }
-    .sf-status.sf-ok { color: #1E8E5A; }
-    .sf-status.sf-err { color: #D1493F; }
-    /* 提交成功后：表单收起，显示感谢卡 */
-    .survey-panel.is-done .survey-form { display: none; }
-    .sf-done {
+    .sf-textarea--sm { min-height: 72px; }
+
+    /* ===== 感谢卡 / 已填过卡：整块替换表单，各留一个退出口 ===== */
+    .sf-done, .sf-repeat {
       display: none;
       width: 100%;
       flex: 1 1 auto;
       flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 32px; box-sizing: border-box;
+      text-align: center; padding: 40px 32px 36px; box-sizing: border-box;
       font-family: var(--font-hei);
     }
+    .survey-panel.is-done .survey-form { display: none; }
     .survey-panel.is-done .sf-done { display: flex; }
+    .survey-panel.is-repeat .survey-form,
+    .survey-panel.is-repeat .sf-done { display: none; }
+    .survey-panel.is-repeat .sf-repeat { display: flex; }
     .sf-done-icon {
       width: 64px; height: 64px; border-radius: 50%;
       background: #EAF7F0; color: #1E8E5A;
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 22px;
     }
-    .sf-done h3 { font-size: 22px; font-weight: 500; margin: 0 0 12px; }
-    .sf-done p { font-size: 14px; color: #6B7280; margin: 0; line-height: 1.7; }
-    .survey-close {
-      position: absolute;
-      top: 12px; right: 12px;   /* 卡片内右上角，完整露出不被裁 */
-      width: 30px; height: 30px;
-      display: flex; align-items: center; justify-content: center;
-      border: 1px solid rgba(28, 32, 44, .12);
-      border-radius: 50%;
-      background: #fff;
-      color: #444;
-      box-shadow: 0 1px 4px rgba(20, 23, 30, .10);
-      cursor: pointer;
-      transition: background .14s ease, transform .1s ease;
-      z-index: 3;
+    .sf-done h3, .sf-repeat h3 { font-size: 22px; font-weight: 500; margin: 0 0 12px; }
+    .sf-done p, .sf-repeat p { font-size: 14px; color: #6B7280; margin: 0; line-height: 1.7; }
+    .sf-card-actions {
+      display: flex; gap: 10px;
+      width: 100%; max-width: 290px; margin-top: 24px;
     }
-    .survey-close:hover { background: #F1EFE8; }
-    .survey-close:active { transform: scale(.92); }
-    .survey-close:focus-visible { outline: 2px solid #2E56C8; outline-offset: 2px; }
+    .sf-card-actions .sf-cancel,
+    .sf-card-actions .sf-submit { flex: 1 1 0; }
+    .sf-card-actions .sf-cancel {
+      background: #fff;
+      border: 1px solid #D8DBE2;
+      color: #4A4F5C;
+      -webkit-backdrop-filter: none; backdrop-filter: none;
+      box-shadow: none;
+    }
+    .sf-card-actions .sf-cancel:hover { background: #F6F7F9; }
+    .sf-card-actions .sf-submit {
+      background: #1C2028;
+      border: 0;
+      color: #fff;
+      -webkit-backdrop-filter: none; backdrop-filter: none;
+      box-shadow: none;
+    }
+    .sf-card-actions .sf-submit:hover { background: #2E3440; }
+
     @media (max-width: 560px) {
       :root { --survey-card-w: 100%; }
-      .survey-overlay { padding: 12px; }
-      .survey-panel { border-radius: 12px; }
-      .survey-form { padding: 36px 20px 24px; }
-      .survey-close { top: 10px; right: 10px; width: 28px; height: 28px; }
+      .survey-overlay { padding: 10px; }
+      .survey-panel { border-radius: 14px; max-height: calc(100dvh - 112px); }
+      .sf-scroll { margin: 6px 6px 0 0; padding: 14px 14px 16px 20px; }
+      .sf-bar { bottom: -54px; }   /* 按钮高 44 + 间距 10 */
+      .sf-cancel, .sf-submit { height: 44px; padding: 0 24px; font-size: 14.5px; }
+      .sf-title { font-size: 20px; }
+      .sf-desc { margin-bottom: 20px; }
+      .sf-field { margin-bottom: 20px; }
     }
 
 
@@ -1517,53 +1590,54 @@
   <!-- 共创问卷：居中弹窗，遮罩压暗首页；本机填过则只显示提示 -->
   <div class="survey-overlay" id="surveyOverlay" aria-hidden="true">
     <div class="survey-panel" role="region" aria-label="Color Do 共创问卷">
-      <button class="survey-close" id="surveyClose" type="button" aria-label="关闭问卷" title="关闭问卷">
-        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
-          <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-        </svg>
-      </button>
       <form class="survey-form" id="surveyForm" novalidate>
-        <div class="sf-correct-tip" id="sfCorrectTip">这是对上次申请的更正，提交后以新内容为准</div>
-        <h2 class="sf-title"><img class="sf-wordmark" src="colo-do-logo-text.svg" alt="Color Do" draggable="false" />开源项目共创申请</h2>
-        <p class="sf-desc">很高兴你对这个项目感兴趣，简单介绍一下你自己吧</p>
+        <div class="sf-scroll" id="sfScroll">
+          <div class="sf-correct-tip" id="sfCorrectTip">这是对上次申请的更正，提交后以新内容为准</div>
+          <h2 class="sf-title"><img class="sf-wordmark" src="colo-do-logo-text.svg" alt="Color Do" draggable="false" />开源项目共创申请</h2>
+          <p class="sf-desc">很高兴你对这个项目感兴趣，简单介绍一下你自己吧</p>
 
-        <div class="sf-field" id="field-gh">
-          <p class="sf-q"><span class="sf-req">*</span>你的GitHub账号ID是？</p>
-          <p class="sf-hint">请输入你的GitHub账号名称或用户名。</p>
-          <input class="sf-input" id="ghId" name="GitHub账号ID" type="text"
-                 autocomplete="off" placeholder="请输入" aria-label="GitHub账号ID" />
-          <p class="sf-error" id="err-gh">请填写你的 GitHub 账号 ID</p>
-        </div>
+          <div class="sf-field" id="field-gh">
+            <p class="sf-q"><span class="sf-req">*</span>你的GitHub账号ID是？</p>
+            <p class="sf-hint">请输入你的GitHub账号名称或用户名。</p>
+            <input class="sf-input" id="ghId" name="GitHub账号ID" type="text"
+                   autocomplete="off" placeholder="请输入" aria-label="GitHub账号ID" />
+            <p class="sf-error" id="err-gh">请填写你的 GitHub 账号 ID</p>
+          </div>
 
-        <div class="sf-field" id="field-why">
-          <p class="sf-q"><span class="sf-req">*</span>你为什么想参与到这个项目，你打算怎么参与到这个项目？</p>
-          <p class="sf-hint">请输入你的答案。</p>
-          <textarea class="sf-textarea" id="whyJoin" name="参与原因与计划"
-                    placeholder="请输入" aria-label="参与原因与计划"></textarea>
-          <p class="sf-error" id="err-why">请填写你的申请理由</p>
-        </div>
+          <div class="sf-field" id="field-why">
+            <p class="sf-q"><span class="sf-req">*</span>你为什么想参与到这个项目，你打算怎么参与到这个项目？</p>
+            <p class="sf-hint">请输入你的答案。</p>
+            <textarea class="sf-textarea" id="whyJoin" name="参与原因与计划"
+                      placeholder="请输入" aria-label="参与原因与计划"></textarea>
+            <p class="sf-error" id="err-why">请填写你的申请理由</p>
+          </div>
 
-        <div class="sf-field" id="field-contact">
-          <p class="sf-q"><span class="sf-req">*</span>联系方式</p>
-          <p class="sf-hint">邮箱、微信、QQ 等任一种，方便我们与你沟通。</p>
-          <input class="sf-input" id="contact" name="联系方式" type="text"
-                 autocomplete="off" placeholder="请输入" aria-label="联系方式" />
-          <p class="sf-error" id="err-contact">请留一个联系方式</p>
-        </div>
+          <div class="sf-field" id="field-contact">
+            <p class="sf-q"><span class="sf-req">*</span>联系方式</p>
+            <p class="sf-hint">邮箱、微信、QQ 等任一种，方便我们与你沟通。</p>
+            <input class="sf-input" id="contact" name="联系方式" type="text"
+                   autocomplete="off" placeholder="请输入" aria-label="联系方式" />
+            <p class="sf-error" id="err-contact">请留一个联系方式</p>
+          </div>
 
-        <div class="sf-field sf-field--note" id="field-note">
-          <p class="sf-q">更正说明<span class="sf-opt">选填</span></p>
-          <p class="sf-hint">一句话说明这次改了什么，方便我们对照。</p>
-          <textarea class="sf-textarea sf-textarea--sm" id="note" name="更正说明"
-                    placeholder="例如：GitHub ID 写错了，已更正" aria-label="更正说明"></textarea>
-        </div>
+          <div class="sf-field sf-field--note" id="field-note">
+            <p class="sf-q">更正说明<span class="sf-opt">选填</span></p>
+            <p class="sf-hint">一句话说明这次改了什么，方便我们对照。</p>
+            <textarea class="sf-textarea sf-textarea--sm" id="note" name="更正说明"
+                      placeholder="例如：GitHub ID 写错了，已更正" aria-label="更正说明"></textarea>
+          </div>
 
-        <div class="sf-actions">
-          <button class="sf-submit" id="sfSubmit" type="submit">提交</button>
+          <p class="sf-id" id="sfDeviceId"></p>
         </div>
         <div class="sf-status" id="sfStatus" role="status" aria-live="polite"></div>
-        <p class="sf-id" id="sfDeviceId"></p>
       </form>
+
+      <div class="sf-bar" id="sfBar">
+        <div class="sf-actions">
+          <button class="sf-cancel" id="sfCancel" type="button">取消</button>
+          <button class="sf-submit" id="sfSubmit" type="submit" form="surveyForm">提交</button>
+        </div>
+      </div>
 
       <div class="sf-done" id="sfDone">
         <div class="sf-done-icon">
@@ -1574,7 +1648,11 @@
         </div>
         <h3 id="sfDoneTitle">申请已收到</h3>
         <p id="sfDoneDesc">感谢你的参与，我们会尽快通过你留下的联系方式与你沟通。</p>
+        <div class="sf-card-actions">
+          <button class="sf-submit" id="sfDoneClose" type="button">关闭</button>
+        </div>
       </div>
+
       <div class="sf-repeat" id="sfRepeat">
         <div class="sf-done-icon">
           <svg viewBox="0 0 32 32" width="32" height="32" fill="none" aria-hidden="true">
@@ -1582,9 +1660,12 @@
                   stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </div>
-        <h3 style="font-size:22px;font-weight:500;margin:0 0 12px;">你已经提交过了</h3>
-        <p style="font-size:14px;color:#6B7280;margin:0;line-height:1.7;">同一台设备只能申请一次，如果填错了可以重新填写。</p>
-        <button class="sf-relink" id="sfReopen" type="button">填错了？点这里重新填写</button>
+        <h3>你已经提交过了</h3>
+        <p>同一台设备只能申请一次，如果填错了可以重新填写。</p>
+        <div class="sf-card-actions">
+          <button class="sf-cancel" id="sfRepeatCancel" type="button">关闭</button>
+          <button class="sf-submit" id="sfReopen" type="button">重新填写</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1593,13 +1674,17 @@
     (function () {
       var trigger = document.getElementById('survey-trigger');
       var overlay = document.getElementById('surveyOverlay');
-      var closeBtn = document.getElementById('surveyClose');
       var panel = overlay.querySelector('.survey-panel');
+      var scrollBox = document.getElementById('sfScroll');
+      var cancelBtn = document.getElementById('sfCancel');
+      var doneCloseBtn = document.getElementById('sfDoneClose');
+      var repeatCancelBtn = document.getElementById('sfRepeatCancel');
       var lastFocus = null;
 
       var DONE_KEY = 'color-do-survey-done';
       var DATA_KEY = 'color-do-survey-data';
       var DEVICE_KEY = 'color-do-device-id';
+      var DRAFT_KEY = 'color-do-survey-draft';   /* 未提交的草稿：取消后还能接着填 */
 
       /* 设备编号：存本地，首次生成；清掉缓存会变，但能显示给填写的人 */
       function getDeviceId() {
@@ -1664,11 +1749,21 @@
         if (panel.classList.contains('is-done')) resetFormState();
         panel.classList.remove('is-correcting');
         panel.classList.toggle('is-repeat', done);
+        if (!done) restoreDraft();     /* 上次点取消时填的内容，接着填 */
+        scrollBox.scrollTop = 0;
         document.body.classList.add('survey-open');
         overlay.setAttribute('aria-hidden', 'false');
-        closeBtn.focus();
+        /* 桌面把光标放到第一个空字段；手机不自动聚焦（会弹键盘顶起页面） */
+        var desktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        setTimeout(function () {
+          if (panel.classList.contains('is-repeat')) repeatCancelBtn.focus();
+          else if (panel.classList.contains('is-done')) doneCloseBtn.focus();
+          else if (desktop) ghId.focus();
+          else cancelBtn.focus();
+        }, 60);
       }
       function closeSurvey() {
+        /* 取消/关闭：保留草稿，不清空已填内容 */
         document.body.classList.remove('survey-open');
         overlay.setAttribute('aria-hidden', 'true');
         if (panel.classList.contains('is-done')) resetFormState();
@@ -1676,7 +1771,9 @@
         if (lastFocus && lastFocus.focus) lastFocus.focus();
       }
       trigger.addEventListener('click', openSurvey);
-      closeBtn.addEventListener('click', closeSurvey);
+      cancelBtn.addEventListener('click', closeSurvey);
+      doneCloseBtn.addEventListener('click', closeSurvey);
+      repeatCancelBtn.addEventListener('click', closeSurvey);
       overlay.addEventListener('mousedown', function (e) {
         if (e.target === overlay) closeSurvey();
       });
@@ -1703,9 +1800,44 @@
         document.getElementById('field-' + field).classList.toggle('has-error', on);
         if (fieldInputs[field]) fieldInputs[field].classList.toggle('is-invalid', on);
       }
-      [['gh', ghId], ['why', whyJoin], ['contact', contact]].forEach(function (pair) {
-        pair[1].addEventListener('input', function () { setError(pair[0], false); });
+
+      /* ===== 草稿：点取消不丢已填内容，下次打开接着填 ===== */
+      function saveDraft() {
+        try {
+          localStorage.setItem(DRAFT_KEY, JSON.stringify({
+            gh: ghId.value, why: whyJoin.value, contact: contact.value, note: note.value
+          }));
+        } catch (e) {}
+      }
+      function clearDraft() {
+        try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+      }
+      function restoreDraft() {
+        var d = null;
+        try { d = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); } catch (e) {}
+        if (!d) return;
+        if (!ghId.value) ghId.value = d.gh || '';
+        if (!whyJoin.value) whyJoin.value = d.why || '';
+        if (!contact.value) contact.value = d.contact || '';
+        if (!note.value) note.value = d.note || '';
+        autoGrow(whyJoin); autoGrow(note);
+      }
+
+      /* 多行输入框：高度随内容自适应，不用原生 resize 手柄 */
+      function autoGrow(el) {
+        if (!el) return;
+        el.style.height = 'auto';
+        el.style.height = Math.min(el.scrollHeight, 220) + 'px';
+      }
+      [whyJoin, note].forEach(function (el) {
+        el.addEventListener('input', function () { autoGrow(el); });
+        autoGrow(el);
       });
+
+      [['gh', ghId], ['why', whyJoin], ['contact', contact]].forEach(function (pair) {
+        pair[1].addEventListener('input', function () { setError(pair[0], false); saveDraft(); });
+      });
+      note.addEventListener('input', saveDraft);
 
       sfDeviceId.textContent = '申请编号：' + deviceId;
 
@@ -1763,6 +1895,7 @@
             sfDoneDesc.textContent = corr
               ? '感谢你的更正，我们会以这次的新内容为准。'
               : '感谢你的参与，我们会尽快通过你留下的联系方式与你沟通。';
+            clearDraft();
             panel.classList.remove('is-correcting');
             panel.classList.add('is-done');
           } else {
@@ -1785,15 +1918,19 @@
         });
       });
 
-      /* 复位本次填写状态：清掉完成态、清空表单与错误提示 */
+      /* 复位本次填写状态：清掉完成态、清空表单与错误提示、草稿一并作废 */
       function resetFormState() {
         panel.classList.remove('is-done');
         panel.classList.remove('is-correcting');
         form.reset();
         note.value = '';
+        whyJoin.style.height = '';
+        note.style.height = '';
+        autoGrow(whyJoin); autoGrow(note);
         setError('gh', false); setError('why', false); setError('contact', false);
         status.className = 'sf-status';
         status.textContent = '';
+        clearDraft();
       }
 
       /* 点"填错了，重新填写"：带出上次内容，切到更正模式 */
@@ -1810,6 +1947,10 @@
         panel.classList.remove('is-repeat');
         panel.classList.add('is-correcting');
         sfDeviceId.textContent = '申请编号：' + deviceId;
+        status.className = 'sf-status';
+        status.textContent = '';
+        autoGrow(whyJoin); autoGrow(note);
+        scrollBox.scrollTop = 0;
         setTimeout(function () { ghId.focus(); }, 60);
       });
     })();
