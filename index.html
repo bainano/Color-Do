@@ -1660,6 +1660,8 @@
         lastFocus = document.activeElement;
         var done = false;
         try { done = localStorage.getItem(DONE_KEY) === '1'; } catch (e) {}
+        /* 先把上次提交成功遗留的完成态清干净，否则会出现「点了重新填写却还是申请已收到」 */
+        if (panel.classList.contains('is-done')) resetFormState();
         panel.classList.remove('is-correcting');
         panel.classList.toggle('is-repeat', done);
         document.body.classList.add('survey-open');
@@ -1669,6 +1671,7 @@
       function closeSurvey() {
         document.body.classList.remove('survey-open');
         overlay.setAttribute('aria-hidden', 'true');
+        if (panel.classList.contains('is-done')) resetFormState();
         window.dispatchEvent(new Event('resize'));
         if (lastFocus && lastFocus.focus) lastFocus.focus();
       }
@@ -1782,20 +1785,16 @@
         });
       });
 
-      /* 关闭时复位本次的填写状态；是否已填过由下次 openSurvey 依据 localStorage 决定 */
-      var origClose = closeSurvey;
-      closeSurvey = function () {
-        origClose();
-        if (panel.classList.contains('is-done')) {
-          panel.classList.remove('is-done');
-          form.reset();
-          note.value = '';
-          setError('gh', false); setError('why', false); setError('contact', false);
-          status.className = 'sf-status';
-          status.textContent = '';
-        }
+      /* 复位本次填写状态：清掉完成态、清空表单与错误提示 */
+      function resetFormState() {
+        panel.classList.remove('is-done');
         panel.classList.remove('is-correcting');
-      };
+        form.reset();
+        note.value = '';
+        setError('gh', false); setError('why', false); setError('contact', false);
+        status.className = 'sf-status';
+        status.textContent = '';
+      }
 
       /* 点"填错了，重新填写"：带出上次内容，切到更正模式 */
       sfReopen.addEventListener('click', function () {
@@ -1807,6 +1806,7 @@
           contact.value = saved.contact || '';
         }
         note.value = '';
+        panel.classList.remove('is-done');      /* 双保险：务必退掉完成态，否则仍显示「申请已收到」 */
         panel.classList.remove('is-repeat');
         panel.classList.add('is-correcting');
         sfDeviceId.textContent = '申请编号：' + deviceId;
